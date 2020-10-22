@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "../src/app/shared/utilities/firebase-testing.module.ts",
+    "**/*.spec.ts"
+  ]
+}

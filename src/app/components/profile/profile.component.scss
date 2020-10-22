@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: $primary;
+  color           : #fff;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th,
+th {
+  background-color: #fff;
+  color           : $primary;
+}
+
+.container {
+  flex-direction: column;
+}
+
+.table {
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .table {
+    width: 46%;
+  }
+}

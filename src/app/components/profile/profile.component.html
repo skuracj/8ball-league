@@ -1,0 +1,69 @@
+<div class="card m-3">
+  <div class="row no-gutters">
+    <div class="col-md-4 d-flex justify-content-center flex-column">
+      <img src="{{playerProfile?.photoURL}}"
+           class="card-img img-thumbnail"
+           onerror="this.src='../../../assets/user-img-placeholder.png';"
+           alt="Profile picture">
+      <button type="button"
+              class="btn btn-primary mt-1"
+              disabled> Upload new image</button>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{playerProfile?.displayName}}
+          <!-- (#{{playerProfile?.rank}})  -->
+        </h5>
+
+        <p *ngIf="!(playerService.player$| async)?.isActive; else profileDetails">
+          Your account is not active.
+
+          <button type="button"
+                  (click)="joinGame()"
+                  class="btn btn-primary">
+            Join game.
+          </button>
+        </p>
+        <ng-template #profileDetails>
+          <p class="card-text text-success">WINS: {{playerProfile?.wins}}</p>
+          <p class="card-text text-danger">LOSES: {{playerProfile?.loses}}</p>
+          <p class="card-text text-primary">TIES: {{playerProfile?.ties}}</p>
+          <p class="card-text">POINTS: {{playerProfile?.points}} </p>
+          <!-- <p class="card-text "><small class="text-muted">Last updated: {{playerProfile?.lastUpdate | date}}</small></p> -->
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex container p-0 m-0 mw-100 pt-4">
+    <table class="table table-striped pt-1">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Games to play</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of filterGamesToPlay(); let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{game.players[0].displayName}} vs {{game.players[1].displayName}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-striped pt-1">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Past games</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of filterPlayedGames(); let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{game.players[0].displayName}} vs {{game.players[1].displayName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

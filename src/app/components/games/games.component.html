@@ -1,0 +1,70 @@
+<div class="container text-center text-primary mt-5">
+  <h2 *ngIf="!isGamesLoaded"> Games didn't start yet.</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+  <mat-form-field>
+    <input matInput
+           type="text"
+           (keyup)="doFilter($event.target.value)"
+           placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="dataSource"
+           matSort>
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef
+                     mat-sort-header
+                     fxHide
+                     fxShow.gt-sm>Game ID</mat-header-cell>
+    <mat-cell *matCellDef="let element"
+              fxHide
+              fxShow.gt-sm>#[{{element.id}}]</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="players[0].displayName">
+    <mat-header-cell *matHeaderCellDef
+                     mat-sort-header>Player 1</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="#"
+         class="reset-link"
+         routerLink="/profile/{{element.players[0].id}}">{{element.players[0].displayName}}</a></mat-cell>
+    <!-- <mat-cell *matCellDef="let element"><a href="#" routerLink="/profile/{{element.id}}" >{{element.displayName }}</a></mat-cell> -->
+
+  </ng-container>
+
+  <ng-container matColumnDef="vs">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">vs</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="players[1].displayName">
+    <mat-header-cell *matHeaderCellDef
+                     mat-sort-header>Player 2</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="#"
+         class="reset-link"
+         routerLink="/profile/{{element.players[1].id}}">{{element.players[1].displayName}}</a></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="result">
+    <mat-header-cell *matHeaderCellDef
+                     mat-sort-header>Result</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span *ngIf="element.winner?.length > 1">( 1 : 1 )</span>
+      <span *ngIf="element.winner[0]?.displayName == element.players[1].displayName && element.winner?.length === 1">( 0
+        : 1 )</span>
+      <span *ngIf="element.winner[0]?.displayName == element.players[0].displayName && element.winner?.length === 1">( 1
+        : 0 )</span>
+      <span *ngIf="element.winner?.length < 1">( - : - )</span>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSize]="20"
+               [pageSizeOptions]="[1, 5, 10, 20]">
+</mat-paginator>

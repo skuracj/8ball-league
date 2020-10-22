@@ -1,0 +1,27 @@
+a {
+  text-decoration: none;
+  color          : white;
+  font-family: swatrg;
+
+  &:hover,
+  &:active {
+    color: lightgray;
+  }
+}
+
+
+.nav-caption {
+  display     : inline-block;
+  padding-left: 6px;
+}
+
+.brand-img {
+  transform: translateX(-8%);
+
+}
+
+.mat-list-item-content, .mat-list-item {
+  color: #fff !important;
+}
+
+

@@ -1,0 +1,30 @@
+
+
+a {
+  text-decoration: none;
+  color          : #fff;
+  font-family: swatrg;
+  letter-spacing: 2px;
+  font-weight: 900;
+
+  &:hover,
+  &:active {
+    color: yellow;
+  }
+}
+
+.navigation-items {
+  list-style-type: none;
+  padding        : 0;
+  margin         : 0;
+}
+
+mat-toolbar {
+  border-radius: 3px;
+}
+
+@media(max-width: 959px) {
+  mat-toolbar {
+    border-radius: 0px;
+  }
+}

@@ -1,0 +1,77 @@
+<button (click)="drawGames()"
+        class="btn btn-info">Draw games</button>
+
+<button (click)="saveGamesToDatabase()"
+        class="btn btn-success">Save games</button>
+
+<div class="container text-center text-primary mt-5">
+  <h2>Admin panel</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+  <mat-form-field>
+    <input matInput
+           type="text"
+           (keyup)="doFilter($event.target.value)"
+           placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef
+                     fxHide
+                     fxShow.gt-sm>Game ID</mat-header-cell>
+    <mat-cell *matCellDef="let element"
+              fxHide
+              fxShow.gt-sm>#({{element.id}})</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="players[0].displayName">
+    <mat-header-cell *matHeaderCellDef>Player 1</mat-header-cell>
+    <mat-cell *matCellDef="let element"><button type="button"
+              class="btn btn-success"
+              (click)="addResult(element.id, [element?.players[0]], element?.players[1])"
+              [disabled]="element?.winner?.length > 0">{{getDisplayName(element, 0)}}</button>
+
+    </mat-cell>
+    <!-- <mat-cell *matCellDef="let element"><a href="#" routerLink="/profile/{{element.id}}" >{{element.displayName }}</a></mat-cell> -->
+
+  </ng-container>
+
+  <ng-container matColumnDef="players[1].displayName">
+    <mat-header-cell *matHeaderCellDef>Player 2</mat-header-cell>
+    <mat-cell *matCellDef="let element"><button type="button"
+              class="btn btn-success"
+              (click)="addResult(element.id, [element?.players[1]], element?.players[0])"
+              [disabled]="element?.winner?.length > 0">{{ element?.players[1].displayName }}</button>
+
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="draw">
+    <mat-header-cell *matHeaderCellDef>Draw</mat-header-cell>
+    <mat-cell *matCellDef="let element"><button type="button"
+              class="btn btn-warning"
+              (click)="addResult(element.id, [element?.players[0], element?.players[1]])"
+              [disabled]="element?.winner?.length > 0">DRAW</button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="result">
+    <mat-header-cell *matHeaderCellDef>Result</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+
+      <span *ngFor="let winner of element.winner; let isLast=last">{{winner.displayName}}{{isLast ? '' : ', '}}</span>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSize]="20"
+               [pageSizeOptions]="[1, 5, 10, 20]">
+</mat-paginator>

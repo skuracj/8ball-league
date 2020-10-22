@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+$fa-font-path: "~font-awesome/fonts";
+
+$primary: #00AFEF;
+
+@import '~bootstrap/scss/bootstrap';
+@import "~font-awesome/scss/font-awesome";
+
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  margin     : 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-table {
+  width                : 100%;
+  // -webkit-box-shadow: 6px 7px 23px -17px rgba(0,0,0,0.75);
+  // -moz-box-shadow   : 6px 7px 23px -17px rgba(0,0,0,0.75);
+  // box-shadow        : 6px 7px 23px -17px rgba(0,0,0,0.75);
+  padding              : 30px;
+}
+
+.mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  justify-content: center;
+  color          : $primary;
+}
+
+.mat-row:nth-child(2n) {
+  background-color: $primary;
+
+  .mat-cell {
+    color: #fff;
+  }
+}
+
+mat-cell:first-child {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  mat-cell:first-child {
+    justify-content: flex-start;
+  }
+
+  mat-table {
+    padding: 0;
+  }
+}
+
+.reset-link {
+  color          : inherit;
+  text-decoration: none;
+
+  &:hover {
+    font-weight    : 900;
+    color          : inherit;
+    text-decoration: none;
+  }
+}

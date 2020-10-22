@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button
+            (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/ranking">
+      <img src="../../../../assets/mobiquity-logo.png"
+           class="w-25 p-2">
+    </a>
+  </div>
+  <div fxFlex
+       fxLayout
+       fxLayoutAlign="end"
+       fxHide.xs>
+    <ul fxLayout
+        fxLayoutGap="15px"
+        class="navigation-items">
+      <li *ngIf="authService.player$ | async">
+        <a routerLink="/ranking"
+           class="text-uppercase">Ranking</a>
+      </li>
+      <li *ngIf="authService.player$ | async">
+        <a routerLink="/games"
+           class="text-uppercase">Games</a>
+      </li>
+      <li *ngIf="authService.player$ | async">
+        <a routerLink="/profile/{{playerId}}"
+           class="text-uppercase">Profile</a>
+      </li>
+      <li *ngIf="authService.player$ | async">
+        <a href="#"
+           (click)="authService.signOut()"
+           class="text-uppercase">Logout</a>
+      </li>
+      <li *ngIf="!(authService.player$ | async)">
+        <a href="#"
+           (click)="authService.googleSignIn()"
+           class="text-uppercase">Login</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,54 @@
+<mat-nav-list>
+
+
+  <a *ngIf="authService.player$ | async"
+     mat-list-item
+     routerLink="/ranking"
+     (click)="onSidenavClose()"
+     data-test="menuItemRanking">
+    <i class="fa fa-trophy"
+       aria-hidden="true"></i>
+    <span class="nav-caption text-uppercase">Ranking</span>
+  </a>
+
+  <a *ngIf="authService.player$ | async"
+     mat-list-item
+     routerLink="/games"
+     (click)="onSidenavClose()"
+     data-test="menuItem-games">
+    <i class="fa fa-list"
+       aria-hidden="true"></i>
+    <span class="nav-caption text-uppercase">Games</span>
+  </a>
+
+  <a *ngIf="authService.player$ | async"
+     mat-list-item
+     routerLink="/profile/{{playerId}}"
+     (click)="onSidenavClose()"
+     data-test="menuItem-profile">
+    <i class="fa fa-user"
+       aria-hidden="true"></i>
+
+    <span class="nav-caption text-uppercase">Profile</span>
+  </a>
+
+
+  <a *ngIf="authService.player$ | async"
+     mat-list-item
+     routerLink="#"
+     (click)="logOut()">
+    <i class="fa fa-sign-out"
+       aria-hidden="true"></i>
+    <span class="nav-caption text-uppercase">Logout</span>
+  </a>
+
+  <a *ngIf="!(authService.player$ | async)"
+     mat-list-item
+     routerLink="#"
+     (click)="logIn()">
+    <i class="fa fa-sign-out"
+       aria-hidden="true"></i>
+    <span class="nav-caption">Login</span>
+  </a>
+
+</mat-nav-list>
